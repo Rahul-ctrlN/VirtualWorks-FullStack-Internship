@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f4ec">
+    <meta name="description" content="Explore a curated coffee collection and vote for the cup you love most.">
+    <title>The Coffee Collection — Coffeehouse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pirata+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-wash page-wash-one" aria-hidden="true"></div>
+    <div class="page-wash page-wash-two" aria-hidden="true"></div>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label="The Coffee Collection home">
+          <span class="bean-mark" aria-hidden="true"><i></i><b></b></span>
+          <span>the coffee<span class="wordmark-light"> collection</span></span>
+        </a>
+        <p class="header-note"><span></span> A GOOD CUP, CHOSEN TOGETHER</p>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-rule"></span> A SMALL COLLECTION OF VERY GOOD COFFEE</p>
+            <h1 id="page-title">The Coffee<br><span>Collection</span></h1>
+            <p class="hero-description">Every cup has its own character. Explore the collection, find your favorite, and give it your vote.</p>
+          </div>
+          <div class="hero-stamp" aria-hidden="true">
+            <span>GOOD<br>THINGS<br>BREW</span>
+            <i></i><b></b>
+          </div>
+          <div class="hero-baseline" aria-hidden="true"><span></span><span>EST. IN THE EVERYDAY</span><span></span></div>
+        </section>
+
+        <section class="collection" aria-labelledby="collection-title">
+          <div class="collection-heading">
+            <div>
+              <p class="section-kicker">PICK YOUR POUR</p>
+              <h2 id="collection-title">Find your kind of coffee</h2>
+            </div>
+            <span id="collection-count" class="collection-count" hidden></span>
+          </div>
+
+          <div id="loading-state" class="loading-state" role="status" aria-live="polite">
+            <span class="loading-bean" aria-hidden="true"></span>
+            <span>Bringing the collection to the table…</span>
+          </div>
+
+          <div id="error-state" class="state-panel error-panel" role="alert" hidden>
+            <span class="state-icon" aria-hidden="true">!</span>
+            <h3>The coffee list is taking a moment</h3>
+            <p id="error-message">We couldn’t load the collection. Please try again.</p>
+            <button id="retry-button" class="retry-button" type="button">Try again</button>
+          </div>
+
+          <div id="empty-state" class="state-panel" role="status" hidden>
+            <h3>No coffees in the collection yet</h3>
+            <p>Please check back soon for a fresh pour.</p>
+          </div>
+
+          <div id="coffee-grid" class="coffee-grid" aria-live="polite" aria-busy="true"></div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span class="footer-mark" aria-hidden="true">✳</span>
+        <span>Take your time. The good cup is worth it.</span>
+        <span class="footer-rule" aria-hidden="true"></span>
+        <span class="footer-end">BREWED WITH CARE</span>
+      </footer>
+    </div>
+  </body>
+</html>
