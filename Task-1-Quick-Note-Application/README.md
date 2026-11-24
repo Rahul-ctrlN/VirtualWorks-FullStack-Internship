@@ -8,6 +8,7 @@ A responsive single-page notebook for capturing and revisiting notes. The browse
 - Save notes through an HTTP `POST` request to the Flask API.
 - Store notes in a local SQLite database, created automatically on startup.
 - Retrieve saved notes through an HTTP `GET` request and display them as cards.
+- Delete a selected note after confirmation through an HTTP `DELETE` request.
 - Keep notes available after refreshing or reopening the page.
 - Reject empty notes and notes longer than 10,000 characters.
 - Show loading, success, and error feedback.
@@ -78,5 +79,6 @@ Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in a browser. The database a
 3. When the user saves a note, JavaScript sends `POST /api/notes` with a JSON body such as `{"content":"An idea to remember"}`.
 4. Flask validates the content and inserts it into SQLite using a parameterized SQL statement, then returns the saved note as JSON.
 5. The page refreshes its list from the API after a successful save. Future page loads retrieve the same notes from the database.
+6. Each note card has a Delete button. After confirmation, the browser sends `DELETE /api/notes/{id}`; Flask removes only that row, and the card disappears from the page when the API confirms success.
 
 The local database is excluded from Git so personal note contents are not committed.

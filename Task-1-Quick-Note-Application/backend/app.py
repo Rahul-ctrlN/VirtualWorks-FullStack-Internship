@@ -104,6 +104,18 @@ def create_app(test_config=None):
             app.logger.exception("Unable to save note")
             return jsonify({"error": "Your note could not be saved. Please try again."}), 500
 
+    @app.delete("/api/notes/<int:note_id>")
+    def delete_note(note_id):
+        try:
+            with get_db() as connection:
+                cursor = connection.execute("DELETE FROM notes WHERE id = ?", (note_id,))
+                if cursor.rowcount == 0:
+                    return jsonify({"error": "That note was not found. It may already be deleted."}), 404
+            return jsonify({"message": "Note deleted."})
+        except sqlite3.Error:
+            app.logger.exception("Unable to delete note %s", note_id)
+            return jsonify({"error": "Your note could not be deleted. Please try again."}), 500
+
     @app.errorhandler(413)
     def request_too_large(_error):
         return jsonify({"error": "The request is too large."}), 413

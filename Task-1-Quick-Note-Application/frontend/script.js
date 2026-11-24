@@ -40,9 +40,44 @@ function makeNoteCard(note) {
   badge.className = "note-badge";
   badge.textContent = "Saved note";
 
-  meta.append(date, badge);
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "delete-button";
+  deleteButton.type = "button";
+  deleteButton.textContent = "Delete";
+  deleteButton.setAttribute("aria-label", "Delete note");
+  deleteButton.addEventListener("click", () => deleteNote(note, card, deleteButton));
+
+  meta.append(date, badge, deleteButton);
   card.append(content, meta);
   return card;
+}
+
+async function deleteNote(note, card, button) {
+  const confirmed = window.confirm("Delete this note? This action cannot be undone.");
+  if (!confirmed) return;
+
+  button.disabled = true;
+  button.textContent = "Deleting…";
+  message.hidden = true;
+  try {
+    const response = await fetch(`/api/notes/${encodeURIComponent(note.id)}`, {
+      method: "DELETE",
+      headers: { Accept: "application/json" },
+    });
+    const payload = await response.json();
+    if (!response.ok) throw new Error(payload.error || "Your note could not be deleted.");
+
+    card.remove();
+    const remaining = notesList.children.length;
+    noteTotal.textContent = String(remaining);
+    emptyState.hidden = remaining > 0;
+    notesList.hidden = remaining === 0;
+    showMessage("Your note was deleted.", "success");
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "Delete";
+    showMessage(error.message || "Could not connect to the server. Please try again.", "error");
+  }
 }
 
 function renderNotes(notes) {
