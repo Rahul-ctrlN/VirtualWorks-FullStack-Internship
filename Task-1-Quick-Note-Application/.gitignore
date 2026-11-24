@@ -1,0 +1,6 @@
+backend/database.db
+backend/database.db-shm
+backend/database.db-wal
+__pycache__/
+*.py[cod]
+.venv/
