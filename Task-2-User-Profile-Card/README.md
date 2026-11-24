@@ -4,12 +4,12 @@ Create a polished, responsive portfolio identity card from a name, short bio, an
 
 ## Features
 
-- Responsive profile form and premium card preview.
+- Responsive profile form and a large, premium matcha-and-honey identity card.
 - Profile data is validated by the Flask JSON API before display.
 - The generated name, bio, and image URL come from the actual POST response.
 - Loading, field validation, success, and connection error feedback.
-- A monogram avatar appears if the submitted image cannot load.
-- The card entrance animation and visual layout adapt to desktop and mobile screens.
+- The entered image URL is returned unchanged by the API and assigned to the card's real `<img>` element. The photo is cropped with `object-fit: cover`; a monogram appears only when the URL is empty or the image fails to load.
+- Image loading feedback, entrance animation, and layout adjustments for desktop and mobile screens.
 
 ## Technologies
 
@@ -59,6 +59,8 @@ Successful response (`201 Created`):
 ```
 
 The API trims the text, checks required fields and limits, and accepts only HTTP or HTTPS image URLs. Invalid data returns `400` with a field-error map; non-JSON requests return `415`.
+
+The API treats the image URL as a URL and does not download or store the image. The browser loads the returned URL directly. Use a public direct image URL (one that resolves to an image response); if the remote image cannot be loaded, the card gracefully displays initials.
 
 ## Run locally
 

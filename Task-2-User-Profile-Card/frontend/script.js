@@ -10,6 +10,9 @@ const profileCard = document.querySelector("#profile-card");
 const previewEmpty = document.querySelector("#preview-empty");
 const profileImage = document.querySelector("#profile-image");
 const profileFallback = document.querySelector("#profile-fallback");
+const imageLoading = document.querySelector("#image-loading");
+const imageStateLabel = document.querySelector("#image-state-label");
+let imageRequestId = 0;
 
 const fieldErrors = {
   name: document.querySelector("#name-error"),
@@ -52,15 +55,40 @@ function displayProfile(profile) {
   document.querySelector("#profile-bio").textContent = profile.bio;
   document.querySelector("#profile-initials").textContent = profile.initials || initialsFor(profile.name);
 
+  const imageUrl = typeof profile.image_url === "string" ? profile.image_url.trim() : "";
+  const thisImageRequest = ++imageRequestId;
   profileImage.onload = () => {
+    if (thisImageRequest !== imageRequestId) return;
     profileImage.hidden = false;
     profileFallback.hidden = true;
+    imageLoading.hidden = true;
+    imageLoading.classList.remove("is-fallback");
   };
   profileImage.onerror = () => {
+    if (thisImageRequest !== imageRequestId) return;
     profileImage.hidden = true;
     profileFallback.hidden = false;
+    imageLoading.hidden = false;
+    imageLoading.classList.add("is-fallback");
+    imageLoading.querySelector(".loading-spinner").hidden = true;
+    imageStateLabel.textContent = "Photo unavailable · initials shown";
   };
-  profileImage.src = profile.image_url;
+  imageLoading.classList.remove("is-fallback");
+  imageLoading.querySelector(".loading-spinner").hidden = false;
+  if (imageUrl) {
+    profileImage.alt = `Profile photo of ${profile.name}`;
+    profileImage.src = imageUrl;
+    profileImage.hidden = false;
+    profileFallback.hidden = true;
+    imageLoading.hidden = false;
+    imageStateLabel.textContent = "Loading photo…";
+  } else {
+    profileImage.removeAttribute("src");
+    profileImage.alt = "";
+    profileImage.hidden = true;
+    profileFallback.hidden = false;
+    imageLoading.hidden = true;
+  }
   profileCard.hidden = false;
   profileCard.classList.remove("card-enter");
   requestAnimationFrame(() => profileCard.classList.add("card-enter"));

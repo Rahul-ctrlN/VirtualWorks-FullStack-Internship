@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f4f6fb">
+    <meta name="theme-color" content="#f7f6ed">
     <meta name="description" content="Create a polished profile card from your own profile details.">
     <title>Profile Studio — Create your profile card</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,24 +94,38 @@
             </div>
 
             <article id="profile-card" class="profile-card" aria-label="Generated user profile" hidden>
-              <div class="card-glow card-glow-one" aria-hidden="true"></div>
-              <div class="card-glow card-glow-two" aria-hidden="true"></div>
-              <div class="card-grid" aria-hidden="true"></div>
-              <div class="card-topline">
-                <div class="card-brand"><span class="card-brand-icon">✦</span> PROFILE STUDIO</div>
-                <span class="profile-tag"><i></i> PROFILE</span>
-              </div>
-              <div class="profile-main">
-                <div class="avatar-ring">
+              <div class="card-decoration card-decoration-one" aria-hidden="true"></div>
+              <div class="card-decoration card-decoration-two" aria-hidden="true"></div>
+              <div class="profile-photo-column">
+                <div class="photo-orbit photo-orbit-one" aria-hidden="true"></div>
+                <div class="photo-orbit photo-orbit-two" aria-hidden="true"></div>
+                <div class="photo-frame">
                   <img id="profile-image" class="profile-image" alt="" hidden>
-                  <div id="profile-fallback" class="profile-fallback" aria-label="Profile image placeholder"><span id="profile-initials"></span><i></i></div>
+                  <div id="profile-fallback" class="profile-fallback" aria-label="Profile image placeholder" hidden>
+                    <span id="profile-initials"></span><i></i>
+                  </div>
+                  <div id="image-loading" class="image-state" role="status" aria-live="polite" hidden>
+                    <span class="loading-spinner" aria-hidden="true"></span><span id="image-state-label">Loading portrait…</span>
+                  </div>
                 </div>
-                <div class="profile-rule"><span></span></div>
-                <p class="card-overline">A LITTLE INTRODUCTION</p>
-                <h3 id="profile-name" class="profile-name"></h3>
-                <p id="profile-bio" class="profile-bio"></p>
+                <p class="photo-caption"><span></span> A FACE TO REMEMBER</p>
               </div>
-              <div class="card-footer"><span class="footer-signature">YOUR STORY, WELL TOLD.</span><span class="card-index"><i></i> IDENTITY CARD</span></div>
+              <div class="profile-info">
+                <div class="card-topline">
+                  <span class="profile-tag"><i></i> MY PROFILE</span>
+                  <span class="card-ref">PROFILE CARD <b>·</b> 01</span>
+                </div>
+                <div class="profile-copy">
+                  <p class="card-overline">YOUR STORY, YOUR STYLE</p>
+                  <h3 id="profile-name" class="profile-name"></h3>
+                  <div class="profile-divider" aria-hidden="true"><span></span></div>
+                  <p id="profile-bio" class="profile-bio"></p>
+                </div>
+                <div class="card-footer">
+                  <span class="footer-signature">A LITTLE BIT OF YOU.</span>
+                  <span class="card-stamp" aria-hidden="true">✳</span>
+                </div>
+              </div>
             </article>
 
             <p class="preview-caption"><span class="caption-sparkle">✦</span> Your submitted details, composed with care.</p>
